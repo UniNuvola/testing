@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: csi-cephfs-demo-ephemeral-pod1
+spec:
+  containers:
+    - name: web-server
+      image: docker.io/library/nginx:latest
+      volumeMounts:
+        - mountPath: "/myspace"
+          name: mypvc
+  volumes:
+    - name: mypvc
+      persistentVolumeClaim:
+        claimName: cephfs-pvc
+        readOnly: false
+
